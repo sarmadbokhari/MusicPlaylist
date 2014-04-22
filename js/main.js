@@ -1,6 +1,6 @@
-var template = $('#templates .video-list-item').html();
-var autoplay = $('#templates .autoplay').html();
-var genres = $('#templates .genres').html();
+var template_html = $('#templates .video-list-item').html();
+var autoplay_html = $('#templates .autoplay').html();
+var genre_html = $('#templates .genres').html();
 
 var videos = [
   { title: 'ES Posthumus', youtubeID: '8AEU5pBxY6E', genre: 'classical' },
@@ -10,18 +10,20 @@ var videos = [
   { title: 'Supplication', youtubeID: 'NzNY9BoWmh0', genre: 'nasheed' }
 ];
 
-var genres = [];
 var stats = {};
 
-for (var i = 0; i < videos.length; i++){
-  var genre = videos[i].genre;
-  if (stats[genre] === undefined){
-    stats[genre]= 0;
+var genre = " ";
+var renderGenres = function(){
+  for (var i = 0; i < videos.length; i++){
+    genre = videos[i].genre;
+    if (stats[genre] === undefined){
+      stats[genre]= 0;
+    }
+    stats[genre] += 1;
   }
-  stats[genre] += 1;
-}
+};
 
-genres.push(stats);
+renderGenres();
 
 
 console.log('Genre object:', stats);
@@ -31,16 +33,15 @@ console.log('Genre object:', stats);
 
 $(document).ready(function(){
   var renderVideoDisplay = function(){
-    $('.video-display').append(Robin.render(autoplay, videos[0]));
+    $('.video-display').append(Robin.render(autoplay_html, videos[0]));
   };
   renderVideoDisplay();
 
   var renderGenreStats = function(){
-  // $("#genre-list").empty();
-    for (var i = 0; i < genres.length; i++){
-      $('#genre-list').append(Robin.render(template, stats));
+    for (var thegenre in stats){
+      console.log(thegenre + ": " + stats[thegenre]);
     }
-    };
+  };
   renderGenreStats();
 
 });
@@ -62,7 +63,7 @@ $(".submit").on('click', function(e){
 var renderVideoList = function () {
   $("#video-list").empty();
   for(var i = 0; i < videos.length; i++){
-    $("#video-list").append(Robin.render(template, videos[i]));
+    $("#video-list").append(Robin.render(template_html, videos[i]));
   }
 };
 

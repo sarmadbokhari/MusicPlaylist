@@ -1,0 +1,56 @@
+<html>
+<head>
+  <title>Robin Starter</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+<body>
+<h1>Create a Shared YouTube Playlist</h1>
+<h2>Add a video:</h2>
+<form id="new-video">
+  <!-- TODO: 2 inputs, 1 button -->
+  <label for="title">Video Title</label><input type="text" class="title"/>
+
+  <label for="link">YouTube Link</label><input type="text" class="link">
+
+   <label for="genre">Genre</label><input type="text" class="genre">
+
+  <button type="button" class="submit">Submit</button>
+</form>
+
+<div class="video-display">
+</div>
+
+<h2>Current Playlist:</h2>
+<div id="video-list"></div>
+
+<h2>Genre Stats:</h2>
+<div id="genre-stats"></div>
+
+
+<!-- TEMPLATES -->
+<div id="templates">
+  <!-- TODO: video-list-item template -->
+  <script type="text/template" class="video-list-item">
+    <h3>Watch <a href="https://www.youtube.com/watch?v={{youtubeID}}" target="_blank">{{title}}</a></h3>
+  </script>
+
+  <script type="text/autoplay" class="autoplay">
+    <div class="video-display">
+      <iframe width="640" height="360" src="http://www.youtube.com/embed/{{youtubeID}}?autoplay=1" frameborder="0" allowfullscreen=""></iframe>
+    </div>
+  </script>
+
+  <script type="text/genre" class="genres">
+    <div class="genre-stats">
+      <p>The {{genre}} genre has {{stats[prop]}} video(s).</p>
+    </div>
+  </script>
+
+</div>
+
+<script src="vendor/js/jquery-1.10.2.min.js"></script>
+<script src="vendor/js/robin.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
